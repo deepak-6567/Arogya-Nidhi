@@ -1,5 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.ArogyaNidhi" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.ArogyaNidhi"
+        parent="Theme.Material3.Dark.NoActionBar">
+
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:windowBackground">@color/dark_blue</item>
+
+        <item name="colorPrimary">@color/neon_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/neon_purple</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorTertiary">@color/neon_blue</item>
+        <item name="colorOnTertiary">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item>
+
+    </style>
+
 </resources>

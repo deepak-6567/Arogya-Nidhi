@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.arogyanidhi.data.local.AppDatabase
 import com.example.arogyanidhi.data.local.DocumentDao
+import com.example.arogyanidhi.data.local.FormDataDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,11 +23,18 @@ object DatabaseModule {
             context,
             AppDatabase::class.java,
             "arogya_nidhi.db"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides
     fun provideDocumentDao(database: AppDatabase): DocumentDao {
         return database.documentDao()
+    }
+
+    @Provides
+    fun provideFormDataDao(database: AppDatabase): FormDataDao {
+        return database.formDataDao()
     }
 }

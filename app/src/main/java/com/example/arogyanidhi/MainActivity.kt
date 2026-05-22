@@ -22,6 +22,7 @@ import com.example.arogyanidhi.ui.auth.LoginScreen
 import com.example.arogyanidhi.ui.auth.RegisterScreen
 import com.example.arogyanidhi.ui.dashboard.DashboardScreen
 import com.example.arogyanidhi.ui.dashboard.DashboardViewModel
+import com.example.arogyanidhi.ui.dashboard.HistoryScreen
 import com.example.arogyanidhi.ui.eligibility.EligibilityScreen
 import com.example.arogyanidhi.ui.eligibility.EligibilityViewModel
 import com.example.arogyanidhi.ui.hospitals.HospitalListScreen
@@ -36,6 +37,7 @@ import com.example.arogyanidhi.ui.schemes.SchemeListScreen
 import com.example.arogyanidhi.ui.schemes.SchemeViewModel
 import com.example.arogyanidhi.ui.onboarding.OnboardingScreen
 import com.example.arogyanidhi.ui.onboarding.OnboardingViewModel
+import com.example.arogyanidhi.ui.splash.SplashScreen
 import com.example.arogyanidhi.ui.splash.SplashViewModel
 import com.example.arogyanidhi.ui.navigation.Screen
 import com.example.arogyanidhi.ui.theme.ArogyaNidhiTheme
@@ -69,7 +71,16 @@ fun ArogyaNidhiMain() {
         return
     }
 
-    NavHost(navController = navController, startDestination = startDestination!!) {
+    NavHost(navController = navController, startDestination = Screen.Splash) {
+        composable<Screen.Splash> {
+            SplashScreen(
+                onSplashFinished = {
+                    navController.navigate(startDestination!!) {
+                        popUpTo(Screen.Splash) { inclusive = true }
+                    }
+                }
+            )
+        }
         composable<Screen.Onboarding> {
             val onboardingViewModel: OnboardingViewModel = hiltViewModel()
             OnboardingScreen(
@@ -107,7 +118,15 @@ fun ArogyaNidhiMain() {
                 onNavigateToSchemes = { navController.navigate(Screen.Schemes) },
                 onNavigateToHospitals = { navController.navigate(Screen.Hospitals) },
                 onNavigateToProfile = { navController.navigate(Screen.Profile) },
-                onNavigateToSettings = { navController.navigate(Screen.Settings) }
+                onNavigateToSettings = { navController.navigate(Screen.Settings) },
+                onNavigateToHistory = { navController.navigate(Screen.History) }
+            )
+        }
+        composable<Screen.History> {
+            val dashboardViewModel: DashboardViewModel = hiltViewModel()
+            HistoryScreen(
+                viewModel = dashboardViewModel,
+                onNavigateBack = { navController.popBackStack() }
             )
         }
         composable<Screen.Settings> {

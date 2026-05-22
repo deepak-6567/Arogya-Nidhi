@@ -1,8 +1,10 @@
 package com.example.arogyanidhi.di
 
 import com.example.arogyanidhi.data.repository.AuthRepositoryImpl
+import com.example.arogyanidhi.data.repository.FormDataRepositoryImpl
 import com.example.arogyanidhi.data.repository.UserRepositoryImpl
 import com.example.arogyanidhi.domain.repository.AuthRepository
+import com.example.arogyanidhi.domain.repository.FormDataRepository
 import com.example.arogyanidhi.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
@@ -25,4 +27,10 @@ abstract class RepositoryModule {
     abstract fun bindUserRepository(
         userRepositoryImpl: UserRepositoryImpl
     ): UserRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindFormDataRepository(
+        formDataRepositoryImpl: FormDataRepositoryImpl
+    ): FormDataRepository
 }
